@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flack</title>
+	<link rel="shortcut icon" type="image/png" href="/static/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/static/flack.css">
+	<script src="{{url_for('static', filename='flack.js')}}"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+</head>
+<body>
+	<div class="sidebar">
+			<div class="logo">
+				Flack
+			</div>
+			<div class="user">
+				Hi, {{username}}
+			</div>
+			<div>
+				<input type="text" name="channel" id="channelName" placeholder="Type new channel name">	
+				<input type="submit" id="createChannel" value="Create channel"/>
+			</div>
+			
+
+			<!-- channel list -->
+			<div id="channelList">
+				<header>Channel List</header>
+				{% for ch in channels %}
+					<div class="channel" data-channel="{{ch}}">{{ch}}</div>
+				{% endfor%}
+			</div>
+		</div>
+
+		<div class="main">
+			{% for ch in channels %}
+				<div class="channelRepo" id="{{ch}}">
+					{% for data in channels[ch] %}
+						<div class="messageInfo">
+							<div class="mUser">{{ data.user }}</div>
+							<div class="mTime">{{data.time}}</div>
+							<div class="mContent">{{data.message}}</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+			
+			
+		</div>
+		
+		<!-- messaging window -->
+		<div class="message">
+				<textarea name="message" autofocus placeholder="Your message" style="height:100px"></textarea>	
+				<input type="submit" name="send" value="Send" id="send">
+			</div>
+
+		<!-- right click menu -->
+		<div class="menu">
+			<ul>
+				<li class="menu-item" id="delete">Delete</li>
+				<li class="menu-item" id="green">Green</li>
+			</ul>	
+		</div>
+		
+</body>
+</html>

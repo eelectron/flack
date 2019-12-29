@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Username</title>
+	<link rel="shortcut icon" type="image/png" href="/static/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/static/index.css">
+</head>
+<body>
+	<header>
+		Flack
+	</header>
+	<div class="subtitle">
+			Welcome to the chatting application
+		</div>
+
+		<div class="displayData">
+			Choose your name which will be shown to other users
+			<form action="{{url_for('getusername')}}" method="POST">
+				<div>
+					<input type="text" name="username" placeholder="Choose a display name">		
+				</div>
+				<div>
+					<input type="submit">		
+				</div>
+		</div>
+	</form>
+</body>
+</html>

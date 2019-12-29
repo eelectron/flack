@@ -1,0 +1,47 @@
+*{
+	box-sizing: border-box;
+}
+
+body, html{
+	height: 100%;
+}
+
+header, div{
+	background-color: black;
+	color: hotpink;
+	text-align: center;
+}
+
+header{
+	font-size: 3em;
+}
+
+.subtitle{
+	font-size: 2em;
+}
+
+.displayData{
+	width: 50%;
+	margin: 10px auto;
+	border-radius: 2px;
+}
+
+input{
+	border-radius: 2px;
+}
+
+input[type=submit]{
+	text-decoration: none;
+	background-color: black;
+	color: white;
+}
+
+input[type=submit]:hover{
+	background-color: hotpink;
+}
+
+@media screen and (max-width: 600px){
+	.displayData{
+		width: 100%;
+	}
+}
