@@ -95,12 +95,26 @@ textarea{
 	height: calc(80vh);
 }
 
+@keyframes hide{
+	from{
+		opacity: 1;
+	}
+
+	to{
+		opacity: 0;
+	}
+}
+
 .messageInfo{
 	width: 99%;
 	margin: 2px;
 	padding: 2px;
 	background-color: #e6ccff;
 	position: relative;
+	animation-name: hide;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
 }
 
 .mTime{
@@ -120,11 +134,23 @@ textarea{
 .menu{
 	display: none;
 	position: fixed;
-	background-color: #ff5511;
+	background-color: white;
 }
 
 .menu ul{
 	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.menu-item{
+	cursor: pointer;
+	padding: 0 1rem;
+	border: 1px solid black;
+}
+
+.menu-item:hover{
+	font-weight: bold;
 }
 
 @media screen and (max-width: 600px){
@@ -153,3 +179,4 @@ textarea{
 		font-size: 1em;
 	}
 }
+

@@ -1,10 +1,14 @@
 let menu = null;
 
+// currently selected message
+let msg = null;
+
+let socket;
 document.addEventListener('DOMContentLoaded', function (){
 	menu = document.querySelector(".menu");
 
 	//connect to websocket
-	var socket = io.connect(location.protocol + "//" + document.domain + ":" + location.port);
+	socket = io.connect(location.protocol + "//" + document.domain + ":" + location.port);
 
 	//on connected, save channel on server
 	socket.on("connect", function(){
@@ -52,7 +56,30 @@ document.addEventListener('DOMContentLoaded', function (){
 		channelRepo.setAttribute("id", data["channel"]);
 		channelRepo.setAttribute("class", "channelRepo");
 		document.querySelector(".main").append(channelRepo);
+
+		// hide this channel
 		channelRepo.style.display = "none";
+	});
+
+	//delete mesage from every one browser
+	socket.on("delete message", function(data){
+		let cn = data["channelName"];
+		let un = data["username"];
+		let dt = data["datetime"];
+
+		//iterate over every message of this channel
+		let messages = document.querySelector("#" + cn).children;
+		
+		for(let i = 0; i < messages.length; i++){
+			//delete msg if user and time matches
+			if(messages[i].querySelector(".mUser").innerHTML == un && messages[i].querySelector(".mTime").innerHTML == dt){
+				messages[i].style.animationPlayState = "running";
+				messages[i].onanimationend = function(event){
+					messages[i].remove();
+				}
+				break;
+			}
+		}
 	});
 
 	//add event listener for every channel
@@ -90,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function (){
 		div.append(mContent);
 
 		//add right click event listener
-		div.addEventListener("contextmenu", showmenu);
+		div.oncontextmenu = showmenu;
 
 		let channelRepo = "#" + data["channel"];
 		console.log(channelRepo);
@@ -103,7 +130,21 @@ document.addEventListener('DOMContentLoaded', function (){
 		let channelName = data["channelName"];
 
 		showChannelMessage(channelName);
-	}	
+	}
+
+	//add a listener for leaving the menu and hiding it
+    menu.addEventListener('mouseleave', hidemenu);	
+
+    // add context menu to already created post
+    document.querySelectorAll(".messageInfo").forEach(function(msgDiv){
+    	msgDiv.oncontextmenu = showmenu;
+    });
+
+    // make message backgroud to green 
+    document.querySelector("#green").onclick = changeToColor;
+
+    //delete msg
+    document.querySelector("#delete").onclick = deleteMsg;
 });
 
 //Ask for username if not already set
@@ -141,12 +182,29 @@ function showChannelMessage(channelName){
 	document.querySelector("#" + channelName).style.display = "block";
 }
 
-// show menu
+// show context menu when right click on a post
 function showmenu(event){
 	event.preventDefault();
-	console.log("showmenu");
-	console.log(event.clientX, event.clientY);
-	menu.style.top = event.clientY;
-	menu.style.left = event.clientX;
+	msg = this;
+	menu.style.top = `${event.clientY}px`;
+	menu.style.left = `${event.clientX}px`;
 	menu.style.display = "block";
+}
+
+// hide menu when remove mouse from menu
+function hidemenu(e){
+	menu.style.display = "none";
+}
+
+// change post to green color
+function changeToColor(){
+	msg.style.backgroundColor = "#ccffcc";
+}
+
+// delete the message
+function deleteMsg(){
+	let channelName = document.querySelector(".active").dataset.channel;
+	let un = msg.querySelector(".mUser").innerHTML;
+	let dt = msg.querySelector(".mTime").innerHTML;
+	socket.emit("delete message", {"channelName": channelName, "username": un, "datetime": dt});
 }

@@ -57,9 +57,20 @@ def sendMessage(data):
 '''
 Delete
 '''
-@app.route("/username")
-def getUserName():
-	if "username" in session:
-		return session["username"]
-	else:
-		return ""
+@socketio.on("delete message")
+def deleteMessage(data):
+	print(data)
+	print(channels)
+	cn = data["channelName"]
+	un = data["username"]
+	dt = data["datetime"]
+	msgs = channels[cn]
+	deleteMsg = None
+	for msg in msgs:
+		if msg["user"] == un and msg["time"] == dt:
+			deleteMsg = msg
+			break
+	msgs.remove(deleteMsg)
+	print(deleteMsg)
+	print(channels)
+	emit("delete message", data, broadcast=True)
