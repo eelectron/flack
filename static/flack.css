@@ -2,12 +2,6 @@
 	box-sizing: border-box;
 }
 
-/*
-body, html{
-	height: 100%;
-}
-*/
-
 a{
 	display: block;
 }
@@ -15,8 +9,9 @@ a{
 .sidebar{
 	width: 20vw;
 	border:1px solid violet;
-	height: 100vh;
 	float: left;
+	overflow: auto;
+	height: calc(100vh);
 }
 
 .main{
@@ -38,10 +33,11 @@ a{
 	background-color: #000;
 	color: white;
 	cursor: pointer;
+	word-wrap: break-word;
 }
 
 .active{
-	background-color: aqua;
+	background-color: hotpink;
 }
 
 input[type=text]{
@@ -84,8 +80,8 @@ textarea{
 }
 
 .user{
-	background-color: white;
-	color: hotpink;
+	background-color: #000;
+	color: #00ffff;
 	font-size: 3vw;
 }
 
@@ -96,25 +92,33 @@ textarea{
 }
 
 @keyframes hide{
-	from{
+	0% {
 		opacity: 1;
+		height: 100%;
 	}
-
-	to{
+	75% {
 		opacity: 0;
+		height: 100%;
+	}
+	100%{
+		opacity: 0;
+		height: 0px;;
 	}
 }
 
 .messageInfo{
 	width: 99%;
-	margin: 2px;
-	padding: 2px;
-	background-color: #e6ccff;
+	margin: 4px;
+	padding: 4px;
+	background-color: hotpink;
 	position: relative;
 	animation-name: hide;
     animation-duration: 2s;
     animation-fill-mode: forwards;
     animation-play-state: paused;
+    max-height: 100px;
+    overflow: auto;
+    border-radius: 5px;
 }
 
 .mTime{

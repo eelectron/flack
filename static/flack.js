@@ -27,11 +27,18 @@ document.addEventListener('DOMContentLoaded', function (){
 		let send = document.querySelector("#send");
 		
 		send.onclick = function(){
-			let message = document.querySelector("textarea").value;
-			let channel = document.querySelector(".active").innerHTML;
-			document.querySelector("textarea").value = "";
-			document.querySelector("textarea").focus();
-			socket.emit("send message", {"channel": channel, "message": message});	
+			//select a channel before sending
+			let ch = document.querySelector(".active")
+			if(ch == null){
+				alert("Please select a channel .");
+			}
+			else{
+				let message = document.querySelector("textarea").value;
+				let channel = document.querySelector(".active").innerHTML;
+				document.querySelector("textarea").value = "";
+				document.querySelector("textarea").focus();
+				socket.emit("send message", {"channel": channel, "message": message});	
+			}	
 		}
 	});
 

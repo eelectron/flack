@@ -6,6 +6,7 @@ from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
 # store channels
@@ -55,15 +56,16 @@ def sendMessage(data):
 
 
 '''
-Delete
+User can delete their message but not others
 '''
 @socketio.on("delete message")
 def deleteMessage(data):
-	print(data)
-	print(channels)
 	cn = data["channelName"]
 	un = data["username"]
 	dt = data["datetime"]
+	if un != session["username"]:
+		return
+
 	msgs = channels[cn]
 	deleteMsg = None
 	for msg in msgs:
@@ -71,6 +73,4 @@ def deleteMessage(data):
 			deleteMsg = msg
 			break
 	msgs.remove(deleteMsg)
-	print(deleteMsg)
-	print(channels)
 	emit("delete message", data, broadcast=True)
