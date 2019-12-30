@@ -28,8 +28,6 @@ def index():
 @app.route("/isUserNameExist", methods=["POST"])
 def isUserNameExist():
 	username = request.form.get("username")
-	print(username)
-	print(usernames)
 	if username in usernames:
 		return "yes"
 	else:

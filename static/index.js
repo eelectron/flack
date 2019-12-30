@@ -16,8 +16,6 @@ function usernameExist(){
 	request.open('POST', '/isUserNameExist');
 	request.onload = function(){
 		const data = request.responseText;
-		console.log(textbox.value);
-		console.log(data);
 		if(data == "yes"){
 			span.innerHTML = "username already exist";
 			span.style.border = "2px solid red";

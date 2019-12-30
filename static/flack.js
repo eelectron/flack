@@ -127,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function (){
 		div.oncontextmenu = showmenu;
 
 		let channelRepo = "#" + data["channel"];
-		console.log(channelRepo);
 		document.querySelector(channelRepo).append(div);
 	});
 
