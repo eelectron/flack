@@ -5,6 +5,7 @@
 	<link rel="shortcut icon" type="image/png" href="/static/favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="/static/index.css">
+	<script src="{{url_for('static', filename='index.js')}}"></script>
 </head>
 <body>
 	<header>
@@ -18,10 +19,13 @@
 			Choose your name which will be shown to other users
 			<form action="{{url_for('getusername')}}" method="POST">
 				<div>
-					<input type="text" name="username" placeholder="Choose a display name">		
+					<input type="text" name="username" placeholder="Choose a unique display name" id="username" required>		
 				</div>
 				<div>
-					<input type="submit">		
+					<span></span>
+				</div>
+				<div>
+					<input type="submit" id="submit">		
 				</div>
 		</div>
 	</form>

@@ -30,6 +30,12 @@ input{
 	border-radius: 2px;
 }
 
+span{
+	background-color: black;
+	color: white;
+	border-radius: 2px;
+}
+
 input[type=submit]{
 	text-decoration: none;
 	background-color: black;

@@ -13,6 +13,9 @@ socketio = SocketIO(app)
 channels = {}
 MAX_NUM_OF_MSG = 100
 
+# save all usernames
+usernames = set()
+
 @app.route("/")
 def index():
 	if 'username' in session:
@@ -21,12 +24,24 @@ def index():
 	else:
 		return render_template("index.html")
 
+
+@app.route("/isUserNameExist", methods=["POST"])
+def isUserNameExist():
+	username = request.form.get("username")
+	print(username)
+	print(usernames)
+	if username in usernames:
+		return "yes"
+	else:
+		return "no"
+
 @app.route("/username", methods=["POST", "GET"])
 def getusername():
 	method = request.method
 	if method == "POST":
 		username = request.form.get("username")
 		session["username"] = username
+		usernames.add(username)
 		return redirect(url_for("index"))
 	else:
 		return render_template("username.html")
