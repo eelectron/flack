@@ -127,7 +127,11 @@ document.addEventListener('DOMContentLoaded', function (){
 		div.oncontextmenu = showmenu;
 
 		let channelRepo = "#" + data["channel"];
-		document.querySelector(channelRepo).append(div);
+		let chRepoObj = document.querySelector(channelRepo);
+		chRepoObj.append(div);
+
+		//scroll to bottom always
+		chRepoObj.scrollTop = chRepoObj.scrollHeight;	
 	});
 
 	// user clicks back button on browser
