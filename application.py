@@ -9,6 +9,9 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app)
 
+#For heroku
+if os.getenv("SECRET_KEY") is None:
+    app.config["SECRET_KEY"] = "kuchbhi"
 # store channels
 channels = {}
 MAX_NUM_OF_MSG = 100
