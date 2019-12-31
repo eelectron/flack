@@ -1,1 +1,1 @@
-web: FLASK_APP=application.py python -m flask run --host=0.0.0.0 --port=$PORT
+web: gunicorn -k eventlet application:app
