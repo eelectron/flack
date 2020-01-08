@@ -11,13 +11,13 @@ a{
 	border:1px solid violet;
 	float: left;
 	overflow: auto;
-	height: calc(100vh);
+	height: calc(98vh);
 }
 
 .main{
 	width: 75vw;
 	border:1px solid green;
-	height: 80vh;
+	height: 78vh;
 	float: left;
 }
 
@@ -64,6 +64,7 @@ header{
 
 textarea{
 	width: 100%;
+	height: 100px;
 }
 
 #send{

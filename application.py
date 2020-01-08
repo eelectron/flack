@@ -12,6 +12,7 @@ socketio = SocketIO(app)
 #For heroku
 if os.getenv("SECRET_KEY") is None:
     app.config["SECRET_KEY"] = "kuchbhi"
+    
 # store channels
 channels = {}
 MAX_NUM_OF_MSG = 100
