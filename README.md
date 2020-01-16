@@ -18,6 +18,6 @@ Personal Touch:
 - User can right click on a post and mark it green .
 - User can right click on a post and delete it , if it's created by them .
 
-https://youtu.be/04EvMNBOm8o
+Code walkthrough : https://youtu.be/04EvMNBOm8o
 
-https://flackthechat.herokuapp.com
+Try the app : https://flackthechat.herokuapp.com
