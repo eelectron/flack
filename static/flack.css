@@ -8,7 +8,7 @@ a{
 
 .sidebar{
 	width: 20vw;
-	border:1px solid violet;
+	border:2px solid violet;
 	float: left;
 	overflow: auto;
 	height: calc(98vh);
@@ -16,7 +16,7 @@ a{
 
 .main{
 	width: 75vw;
-	border:1px solid green;
+	border:2px solid green;
 	height: 78vh;
 	float: left;
 }
@@ -25,7 +25,7 @@ a{
 	width: 75vw;
 	height: 20vh;
 	float: left;
-	border: 1px solid blue;
+	border: 2px solid blue;
 }
 
 .channel{
@@ -84,12 +84,14 @@ textarea{
 	background-color: #000;
 	color: #00ffff;
 	font-size: 3vw;
+	width: 100%;
+	word-wrap: break-word;
 }
 
 .channelRepo{
 	display: none;
 	overflow: auto;
-	height: calc(80vh);
+	height: calc(78vh);
 }
 
 @keyframes hide{
@@ -108,7 +110,7 @@ textarea{
 }
 
 .messageInfo{
-	width: 99%;
+	width: 98%;
 	margin: 4px;
 	padding: 4px;
 	background-color: hotpink;

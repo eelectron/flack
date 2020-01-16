@@ -5,9 +5,11 @@
 	<link rel="shortcut icon" type="image/png" href="/static/favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<!--
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
+-->
 
 	<link rel="stylesheet" type="text/css" href="/static/flack.css">
 	<script src="{{url_for('static', filename='flack.js')}}"></script>
@@ -15,58 +17,58 @@
 </head>
 <body>
 	<div class="sidebar">
-			<div class="logo">
-				Flack
-			</div>
-			<div class="user">
-				Hi, {{username}}
-			</div>
-			<div>
-				<input type="text" name="channel" id="channelName" placeholder="Type new channel name">	
-				<input type="submit" id="createChannel" value="Create channel"/>
-			</div>
-			
-
-			<!-- channel list -->
-			<div id="channelList">
-				<header>Channel List</header>
-				{% for ch in channels %}
-					<div class="channel" data-channel="{{ch}}">{{ch}}</div>
-				{% endfor%}
-			</div>
+		<div class="logo">
+			Flack
 		</div>
+		<div class="user">
+			Hi, {{username}}
+		</div>
+		<div>
+			<input type="text" name="channel" id="channelName" placeholder="Type new channel name">	
+			<input type="submit" id="createChannel" value="Create channel"/>
+		</div>
+		
 
-		<div class="main">
+		<!-- channel list -->
+		<div id="channelList">
+			<header>Channel List</header>
 			{% for ch in channels %}
-				<div class="channelRepo" id="{{ch}}">
-					{% for data in channels[ch] %}
-						<div class="messageInfo">
-							<div class="mUser">{{ data.user }}</div>
-							<div class="mTime">{{data.time}}</div>
-							<div class="mContent">{{data.message}}</div>
-						</div>
-					{% endfor %}
-				</div>
-			{% endfor %}
+				<div class="channel" data-channel="{{ch}}">{{ch}}</div>
+			{% endfor%}
 		</div>
-		
-		<!-- messaging window -->
-		<div class="message">
-				<div>
-					<textarea name="message" autofocus placeholder="Your message"></textarea>	
-				</div>
-				<div>
-					<input type="submit" name="send" value="Send" id="send">	
-				</div>	
-			</div>
+	</div>
 
-		<!-- right click menu -->
-		<div class="menu">
-			<ul>
-				<li class="menu-item" id="delete">Delete</li>
-				<li class="menu-item" id="green">Green</li>
-			</ul>	
+	<!-- messages are added here -->
+	<div class="main">
+		{% for ch in channels %}
+			<div class="channelRepo" id="{{ch}}">
+				{% for data in channels[ch] %}
+					<div class="messageInfo">
+						<div class="mUser">{{ data.user }}</div>
+						<div class="mTime">{{data.time}}</div>
+						<div class="mContent">{{data.message}}</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+	
+	<!-- messaging window -->
+	<div class="message">
+		<div>
+			<textarea name="message" autofocus placeholder="Your message"></textarea>	
 		</div>
-		
+		<div>
+			<input type="submit" name="send" value="Send" id="send">	
+		</div>	
+	</div>
+
+	<!-- right click menu -->
+	<div class="menu">
+		<ul>
+			<li class="menu-item" id="delete">Delete</li>
+			<li class="menu-item" id="green">Green</li>
+		</ul>	
+	</div>		
 </body>
 </html>
